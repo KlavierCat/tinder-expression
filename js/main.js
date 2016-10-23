@@ -33,7 +33,9 @@ var iterateImages = function(){
 			drawImage();
 			var capturedImg = canvas.toDataURL("image/png");
 			var existingPictures = JSON.parse(localStorage.getItem("tinder-expression"));
-			existingPictures.push({fileName: capturedImg});
+			var newEntry = {};
+			newEntry[fileName] = capturedImg;
+			existingPictures.push(newEntry);
 			localStorage.setItem("tinder-expression", JSON.stringify(existingPictures));
 		}, 1800);
 		i++;
@@ -44,11 +46,6 @@ var iterateImages = function(){
 	
 	changeSrc();
 };
-
-// Trigger photo take
-document.getElementById("snap").addEventListener("click", function() {
-	drawImage();
-});
 
 document.body.onkeydown = function(e) {
 	if(e.keyCode=32){
